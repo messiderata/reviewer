@@ -1,0 +1,4 @@
+# Preserve the original locally; the smaller web copy is in assets.
+/STS Presentation.pdf
+/recall-site.zip
+.DS_Store
