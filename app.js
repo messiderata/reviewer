@@ -5,10 +5,20 @@ let quiz=null, noteIndex=0;
 let soundEnabled=true, audioContext;
 try{soundEnabled=localStorage.getItem('recall-sound')!=='off';}catch{}
 function updateSoundButton(){const button=$('#sound-toggle');button.textContent=soundEnabled?'Sound: on':'Sound: off';button.setAttribute('aria-pressed',String(soundEnabled));}
-$('#sound-toggle').onclick=()=>{soundEnabled=!soundEnabled;try{localStorage.setItem('recall-sound',soundEnabled?'on':'off');}catch{}updateSoundButton();};
+$('#sound-toggle').onclick=()=>{soundEnabled=!soundEnabled;if(!soundEnabled&&window.speechSynthesis)window.speechSynthesis.cancel();try{localStorage.setItem('recall-sound',soundEnabled?'on':'off');}catch{}updateSoundButton();};
 updateSoundButton();
 async function playAnswerSound(correct){
   if(!soundEnabled)return;
+  try{
+    if(window.speechSynthesis&&window.SpeechSynthesisUtterance){
+      const speech=new window.SpeechSynthesisUtterance(correct?'Ang galing mo, Pauleen!':'Galingan mo, Pauleen!');
+      speech.lang='fil-PH';speech.rate=0.95;speech.volume=0.85;
+      const voice=window.speechSynthesis.getVoices().find(v=>/^(fil|tl)(-|$)/i.test(v.lang));
+      if(voice)speech.voice=voice;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(speech);
+    }
+  }catch{} // Keep the chime available when speech is unsupported.
   try{
     const Audio=window.AudioContext||window.webkitAudioContext;
     if(!Audio)return;

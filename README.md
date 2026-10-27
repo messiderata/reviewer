@@ -8,7 +8,7 @@ Open `index.html` in a browser, or run `python3 -m http.server 8080` and visit h
 - Identification and enumeration questions, with topic and session-length filters.
 - Shuffled questions, per-answer feedback, partial credit, and missed-question retry.
 - Searchable extracted notes and an embedded PDF viewer (uses the browser’s PDF support).
-- Correct and incorrect answer sounds, with a saved Sound on/off preference. Skipped questions stay silent.
+- Correct and incorrect answer sounds with spoken encouragement for Pauleen, and a saved Sound on/off preference. Speech uses available browser voices. Skipped questions stay silent.
 - Session history stored in this browser's localStorage. No account or backend.
 
 Answer checking ignores punctuation, spacing, accents and capitalization, and accepts explicitly listed aliases. Enumeration accepts any order and counts duplicate answers once. Other wording and typos may need comparison against the displayed key. Question coverage is curated, not every fact in every PDF. The original notes may contain inaccuracies; this app is a study aid based on those notes, not independently fact-checked material.
