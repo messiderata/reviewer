@@ -2,23 +2,20 @@ const $=s=>document.querySelector(s), app=$('#app');
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let history=[];try{history=JSON.parse(localStorage.getItem('recall-history')||'[]');if(!Array.isArray(history))history=[];}catch{}
 let quiz=null, noteIndex=0;
-let soundEnabled=true, audioContext;
+let soundEnabled=true, audioContext, answerAudio;
 try{soundEnabled=localStorage.getItem('recall-sound')!=='off';}catch{}
 function updateSoundButton(){const button=$('#sound-toggle');button.textContent=soundEnabled?'Sound: on':'Sound: off';button.setAttribute('aria-pressed',String(soundEnabled));}
-$('#sound-toggle').onclick=()=>{soundEnabled=!soundEnabled;if(!soundEnabled&&window.speechSynthesis)window.speechSynthesis.cancel();try{localStorage.setItem('recall-sound',soundEnabled?'on':'off');}catch{}updateSoundButton();};
+$('#sound-toggle').onclick=()=>{soundEnabled=!soundEnabled;if(!soundEnabled&&answerAudio){answerAudio.pause();answerAudio.currentTime=0;}try{localStorage.setItem('recall-sound',soundEnabled?'on':'off');}catch{}updateSoundButton();};
 updateSoundButton();
 async function playAnswerSound(correct){
   if(!soundEnabled)return;
   try{
-    if(window.speechSynthesis&&window.SpeechSynthesisUtterance){
-      const speech=new window.SpeechSynthesisUtterance(correct?'Ang galing mo, Pauleen!':'Galingan mo, Pauleen!');
-      speech.lang='fil-PH';speech.rate=0.95;speech.volume=0.85;
-      const voice=window.speechSynthesis.getVoices().find(v=>/^(fil|tl)(-|$)/i.test(v.lang));
-      if(voice)speech.voice=voice;
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(speech);
-    }
-  }catch{} // Keep the chime available when speech is unsupported.
+    if(answerAudio){answerAudio.pause();answerAudio.currentTime=0;}
+    answerAudio=new window.Audio(correct?'assets/audio/correct-tagalog.mp3':'assets/audio/wrong-tagalog.mp3');
+    answerAudio.volume=0.85;
+    await answerAudio.play();
+    return;
+  }catch{} // Use a short chime if the saved clip cannot play.
   try{
     const Audio=window.AudioContext||window.webkitAudioContext;
     if(!Audio)return;
