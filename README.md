@@ -9,6 +9,8 @@ Open `index.html` in a browser, or run `python3 -m http.server 8080` and visit h
 - Shuffled questions, per-answer feedback, partial credit, and missed-question retry.
 - Searchable extracted notes and an embedded PDF viewer (uses the browser’s PDF support).
 - Correct and incorrect answer sounds with spoken encouragement for Pauleen, and a saved Sound on/off preference. Speech uses bundled Filipino neural voice MP3s (Microsoft Blessica, generated with edge-tts), with a chime fallback if audio playback fails. Skipped questions stay silent.
+- Dark mode follows your system initially; the header toggle saves your preference.
+- Tablet pen mode provides larger answer fields for device handwriting-to-text (Apple Scribble, Samsung S Pen to text, or a handwriting keyboard). Enable the device feature first, write in the field, review the converted text, then check. Recognition is provided by the device, not by the app; unsupported devices can still type.
 - Session history stored in this browser's localStorage. No account or backend.
 
 Answer checking ignores punctuation, spacing, accents and capitalization, and accepts explicitly listed aliases. Enumeration accepts any order and counts duplicate answers once. Other wording and typos may need comparison against the displayed key. Question coverage is curated, not every fact in every PDF. The original notes may contain inaccuracies; this app is a study aid based on those notes, not independently fact-checked material.
