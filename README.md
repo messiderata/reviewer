@@ -9,7 +9,7 @@ Open `index.html` in a browser, or run `python3 -m http.server 8080` and visit h
 - Shuffled questions, per-answer feedback, partial credit, and missed-question retry.
 - Searchable extracted notes and an embedded PDF viewer (uses the browser’s PDF support).
 - Correct and incorrect answer sounds with spoken encouragement for Pauleen, and a saved Sound on/off preference. Speech uses bundled Filipino neural voice MP3s (Microsoft Blessica, generated with edge-tts), with a chime fallback if audio playback fails. Skipped questions stay silent.
-- Fish Game tab: every earned answer point grows a pet fish. Points and size persist in this browser across visits; clearing browser storage resets the pet. Growth gradually slows to keep it within the tank.
+- Fish Game shop: each earned answer point gives 1 coin. Buy goldfish (15), blue fish (20), pink fish (25), or 3 food servings (5). Select a pet and feed it to grow. Coins, food, pets, and individual sizes persist in this browser. Existing points become coins and existing fish size is preserved. Clearing browser storage resets the game.
 - A swimming fish tracks fully correct questions toward a star; wrong or skipped questions do not advance it. Motion respects reduced-motion preferences.
 - Dark mode follows your system initially; the header toggle saves your preference.
 - Tablet pen mode provides larger answer fields for device handwriting-to-text (Apple Scribble, Samsung S Pen to text, or a handwriting keyboard). Enable the device feature first, write in the field, review the converted text, then check. Recognition is provided by the device, not by the app; unsupported devices can still type.
